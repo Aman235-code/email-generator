@@ -35,10 +35,14 @@ export default function App() {
     setReply("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/generate", {
-        emailContent: email,
-        tone: tone.label,
-      });
+      const res = await axios.post(
+        import.meta.env.VITE_BACKEND_URL + "/api/generate",
+        {
+          emailContent: email,
+          tone: tone.label,
+        }
+      );
+
       setReply(res.data.reply);
       localStorage.setItem("lastReply", res.data.reply);
       toast.success("Reply generated successfully!");
